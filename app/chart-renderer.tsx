@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useMemo, useState } from "react"
-import { ChevronDown } from "lucide-react"
+import { useMemo, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import {
   Area,
   AreaChart,
@@ -16,14 +16,14 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from "recharts"
+} from "recharts";
 
-import { ChartContainer } from "@/components/ui/chart"
-import { getCategoricalColumns, getDataKeys, getNumericColumns } from "./utils"
+import { ChartContainer } from "@/components/ui/chart";
+import { getCategoricalColumns, getDataKeys, getNumericColumns } from "./utils";
 
 interface ChartRendererProps {
-  data: any[]
-  chartType: "bar" | "line" | "pie" | "area"
+  data: any[];
+  chartType: "bar" | "line" | "pie" | "area";
 }
 
 // Custom tooltip component
@@ -33,62 +33,90 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       <div className="rounded-lg border border-border bg-background p-3 shadow-md">
         <p className="mb-1 font-medium">{label}</p>
         {payload.map((entry: any, index: number) => (
-          <div key={`tooltip-${index}`} className="flex items-center gap-2 text-sm">
-            <div className="h-3 w-3 rounded-full" style={{ backgroundColor: entry.color }} />
+          <div
+            key={`tooltip-${index}`}
+            className="flex items-center gap-2 text-sm"
+          >
+            <div
+              className="h-3 w-3 rounded-full"
+              style={{ backgroundColor: entry.color }}
+            />
             <span>{entry.name}: </span>
             <span className="font-medium">
-              {typeof entry.value === "number" ? entry.value.toLocaleString() : entry.value}
+              {typeof entry.value === "number"
+                ? entry.value.toLocaleString()
+                : entry.value}
             </span>
           </div>
         ))}
       </div>
-    )
+    );
   }
 
-  return null
-}
+  return null;
+};
 
 export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
-  const dataKeys = getDataKeys(data)
-  const categoricalColumns = getCategoricalColumns(data)
-  const numericColumns = getNumericColumns(data)
+  const dataKeys = getDataKeys(data);
+  const categoricalColumns = getCategoricalColumns(data);
+  const numericColumns = getNumericColumns(data);
 
-  const [xAxis, setXAxis] = useState<string>(categoricalColumns[0] || dataKeys[0])
-  const [yAxis, setYAxis] = useState<string>(numericColumns[0] || dataKeys[1])
+  const [xAxis, setXAxis] = useState<string>(
+    categoricalColumns[0] || dataKeys[0]
+  );
+  const [yAxis, setYAxis] = useState<string>(numericColumns[0] || dataKeys[1]);
 
   const chartConfig = useMemo(() => {
-    const config: Record<string, any> = {}
+    const config: Record<string, any> = {};
     numericColumns.forEach((column, index) => {
       config[column] = {
         label: column,
         color: `hsl(var(--chart-${(index % 9) + 1}))`,
-      }
-    })
-    return config
-  }, [numericColumns])
+      };
+    });
+    return config;
+  }, [numericColumns]);
 
-  const chartColor = `hsl(var(--chart-1))`
+  const chartColor = `hsl(var(--chart-1))`;
 
   const renderChart = () => {
     switch (chartType) {
       case "bar":
         return (
-          <ChartContainer config={chartConfig} className="h-full">
-            <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+          <ChartContainer config={chartConfig} className="h-full w-full py-4">
+            <BarChart
+              data={data}
+              margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+            >
               <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey={xAxis} angle={-45} textAnchor="end" height={60} tickMargin={20} />
+              <XAxis
+                dataKey={xAxis}
+                angle={-45}
+                textAnchor="end"
+                height={60}
+                tickMargin={20}
+              />
               <YAxis />
               <Tooltip content={<CustomTooltip />} />
               <Bar dataKey={yAxis} fill={chartColor} radius={4} name={yAxis} />
             </BarChart>
           </ChartContainer>
-        )
+        );
       case "line":
         return (
           <ChartContainer config={chartConfig} className="h-full">
-            <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+            <LineChart
+              data={data}
+              margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+            >
               <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey={xAxis} angle={-45} textAnchor="end" height={60} tickMargin={20} />
+              <XAxis
+                dataKey={xAxis}
+                angle={-45}
+                textAnchor="end"
+                height={60}
+                tickMargin={20}
+              />
               <YAxis />
               <Tooltip content={<CustomTooltip />} />
               <Line
@@ -102,7 +130,7 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
               />
             </LineChart>
           </ChartContainer>
-        )
+        );
       case "pie":
         return (
           <ChartContainer config={chartConfig} className="h-full">
@@ -115,21 +143,36 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
                 cx="50%"
                 cy="50%"
                 outerRadius={120}
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent }) =>
+                  `${name}: ${(percent * 100).toFixed(0)}%`
+                }
               >
                 {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={`hsl(var(--chart-${(index % 9) + 1}))`} name={entry[xAxis]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={`hsl(var(--chart-${(index % 9) + 1}))`}
+                    name={entry[xAxis]}
+                  />
                 ))}
               </Pie>
             </PieChart>
           </ChartContainer>
-        )
+        );
       case "area":
         return (
           <ChartContainer config={chartConfig} className="h-full">
-            <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+            <AreaChart
+              data={data}
+              margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+            >
               <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey={xAxis} angle={-45} textAnchor="end" height={60} tickMargin={20} />
+              <XAxis
+                dataKey={xAxis}
+                angle={-45}
+                textAnchor="end"
+                height={60}
+                tickMargin={20}
+              />
               <YAxis />
               <Tooltip content={<CustomTooltip />} />
               <Area
@@ -143,17 +186,19 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
               />
             </AreaChart>
           </ChartContainer>
-        )
+        );
       default:
-        return <div>Select a chart type</div>
+        return <div>Select a chart type</div>;
     }
-  }
+  };
 
   return (
     <div className="h-full">
       <div className="mb-4 flex flex-wrap gap-4">
         <div className="w-full sm:w-auto">
-          <label className="block text-sm font-medium mb-1">X-Axis / Category</label>
+          <label className="block text-sm font-medium mb-1">
+            X-Axis / Category
+          </label>
           <div className="relative">
             <select
               className="w-full rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background appearance-none pr-10"
@@ -170,7 +215,9 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
           </div>
         </div>
         <div className="w-full sm:w-auto">
-          <label className="block text-sm font-medium mb-1">Y-Axis / Value</label>
+          <label className="block text-sm font-medium mb-1">
+            Y-Axis / Value
+          </label>
           <div className="relative">
             <select
               className="w-full rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background appearance-none pr-10"
@@ -189,6 +236,5 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
       </div>
       {renderChart()}
     </div>
-  )
+  );
 }
-

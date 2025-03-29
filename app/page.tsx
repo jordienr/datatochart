@@ -102,13 +102,10 @@ Widget D,75,April,Garden`;
 
   return (
     <main className="container mx-auto py-6 px-4 md:px-6 max-w-5xl antialiased tracking-tight">
-      <header className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-xl mb-2 font-medium">
-            datatochart<span className="text-muted-foreground/50">.com</span>
-          </h1>
-        </div>
-        <ThemeToggle />
+      <header className="mb-6">
+        <h1 className="text-xl mb-2 font-medium text-center">
+          datatochart<span className="text-muted-foreground/50">.com</span>
+        </h1>
       </header>
 
       <div className="grid gap-6">
