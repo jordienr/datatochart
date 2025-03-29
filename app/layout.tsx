@@ -27,11 +27,22 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <footer className="text-center text-sm text-muted-foreground py-12 mt-12 border-t border-zinc-200">
-            Made by{" "}
-            <Link className="underline" href="https://jordienric.com">
-              Jordi Enric
-            </Link>
+          <footer className="text-center space-y-4 text-sm text-muted-foreground py-12 mt-12 border-t border-zinc-200">
+            <p>
+              Made by{" "}
+              <Link className="underline" href="https://jordienric.com">
+                Jordi Enric
+              </Link>
+            </p>
+            <p>
+              Source code available on{" "}
+              <Link
+                className="underline"
+                href="https://github.com/jordienr/datatochart"
+              >
+                GitHub
+              </Link>
+            </p>
           </footer>
         </ThemeProvider>
       </body>
