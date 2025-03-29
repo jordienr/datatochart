@@ -24,6 +24,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import ChartRenderer from "./chart-renderer";
 import DataTable from "./data-table";
 import { parseData } from "./utils";
+import { ChartTypeSelector } from "./components/chart-type-selector";
 
 export default function DataVizApp() {
   const [rawData, setRawData] = useState("");
@@ -176,24 +177,14 @@ Example:
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-4">
-                  <div className="w-full md:w-auto">
+                  <div className="w-full">
                     <label className="block text-sm font-medium mb-2">
                       Chart Type
                     </label>
-                    <div className="relative">
-                      <select
-                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background appearance-none pr-10"
-                        value={chartType}
-                        onChange={(e) => setChartType(e.target.value as any)}
-                      >
-                        {chartOptions.map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                      </select>
-                      <ChevronDown className="absolute right-3 top-2.5 h-4 w-4 opacity-50" />
-                    </div>
+                    <ChartTypeSelector
+                      value={chartType}
+                      onValueChange={(value) => setChartType(value as any)}
+                    />
                   </div>
                 </div>
               </CardContent>

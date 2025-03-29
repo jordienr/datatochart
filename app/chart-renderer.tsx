@@ -83,7 +83,7 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
     switch (chartType) {
       case "bar":
         return (
-          <ChartContainer config={chartConfig} className="h-full w-full py-4">
+          <ChartContainer config={chartConfig} className="h-full">
             <BarChart
               data={data}
               margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
@@ -193,7 +193,7 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
   };
 
   return (
-    <div className="h-full">
+    <div className="h-full pb-8">
       <div className="mb-4 flex flex-wrap gap-4">
         <div className="w-full sm:w-auto">
           <label className="block text-sm font-medium mb-1">
