@@ -125,7 +125,7 @@ AirPods Pro,3400,March,Accessories`;
 
   return (
     <main className="container mx-auto py-4 sm:py-6 px-3 sm:px-4 md:px-6 max-w-7xl antialiased tracking-tight">
-      <header className="mb-4 sm:mb-6">
+      <header className="mb-24">
         <h1 className="text-lg sm:text-xl mb-2 font-medium text-center">
           datatochart<span className="text-muted-foreground/50">.com</span>
         </h1>

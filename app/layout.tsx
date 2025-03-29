@@ -28,8 +28,8 @@ export default function RootLayout({
             defaultTheme="light"
             disableTransitionOnChange
           >
-            {children}
-            <footer className="text-center space-y-4 text-sm text-muted-foreground py-12 mt-12 border-t border-zinc-200">
+            <div className="max-w-4xl mx-auto">{children}</div>
+            <footer className="text-center space-y-4 text-sm text-muted-foreground py-24 mt-24 border-t border-zinc-200">
               <p>
                 Made by{" "}
                 <Link className="underline" href="https://jordienric.com">
