@@ -102,26 +102,30 @@ Widget D,75,April,Garden`;
   ];
 
   return (
-    <main className="container mx-auto py-6 px-4 md:px-6 max-w-5xl antialiased tracking-tight">
-      <header className="mb-6">
-        <h1 className="text-xl mb-2 font-medium text-center">
+    <main className="container mx-auto py-4 sm:py-6 px-3 sm:px-4 md:px-6 max-w-7xl antialiased tracking-tight">
+      <header className="mb-4 sm:mb-6">
+        <h1 className="text-lg sm:text-xl mb-2 font-medium text-center">
           datatochart<span className="text-muted-foreground/50">.com</span>
         </h1>
       </header>
 
-      <div className="grid gap-6">
+      <div className="grid gap-4 sm:gap-6">
         <Card>
-          <CardHeader>
-            <CardTitle>Input Data</CardTitle>
+          <CardHeader className="p-4 sm:p-6">
+            <CardTitle className="text-lg sm:text-xl">Input Data</CardTitle>
             <CardDescription>
               Paste your data in CSV or JSON format
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4 sm:p-6">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-4">
-                <TabsTrigger value="csv">CSV</TabsTrigger>
-                <TabsTrigger value="json">JSON</TabsTrigger>
+              <TabsList className="mb-4 w-full sm:w-auto">
+                <TabsTrigger value="csv" className="flex-1 sm:flex-none">
+                  CSV
+                </TabsTrigger>
+                <TabsTrigger value="json" className="flex-1 sm:flex-none">
+                  JSON
+                </TabsTrigger>
               </TabsList>
               <TabsContent value="csv">
                 <Textarea
@@ -154,11 +158,15 @@ Example:
 
             {error && <p className="text-destructive mt-2 text-sm">{error}</p>}
 
-            <div className="mt-4 flex justify-end gap-2">
-              <Button variant="outline" onClick={loadDemoData}>
+            <div className="mt-4 flex flex-col sm:flex-row justify-end gap-2">
+              <Button
+                variant="outline"
+                onClick={loadDemoData}
+                className="w-full sm:w-auto"
+              >
                 Load Demo Data
               </Button>
-              <Button onClick={handleDataSubmit}>
+              <Button onClick={handleDataSubmit} className="w-full sm:w-auto">
                 <Upload className="mr-2 h-4 w-4" />
                 Process Data
               </Button>
@@ -169,38 +177,44 @@ Example:
         {parsedData && parsedData.length > 0 && (
           <>
             <Card>
-              <CardHeader>
-                <CardTitle>Chart Options</CardTitle>
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-lg sm:text-xl">
+                  Chart Options
+                </CardTitle>
                 <CardDescription>
                   Select chart type and customize visualization
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-4">
-                  <div className="w-full">
-                    <label className="block text-sm font-medium mb-2">
-                      Chart Type
-                    </label>
-                    <ChartTypeSelector
-                      value={chartType}
-                      onValueChange={(value) => setChartType(value as any)}
-                    />
-                  </div>
+              <CardContent className="p-4 sm:p-6">
+                <div className="w-full">
+                  <label className="block text-sm font-medium mb-2">
+                    Chart Type
+                  </label>
+                  <ChartTypeSelector
+                    value={chartType}
+                    onValueChange={(value) => setChartType(value as any)}
+                  />
                 </div>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
+              <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 sm:p-6">
                 <div>
-                  <CardTitle>Visualization</CardTitle>
+                  <CardTitle className="text-lg sm:text-xl">
+                    Visualization
+                  </CardTitle>
                   <CardDescription>
                     Your data visualized as a chart
                   </CardDescription>
                 </div>
                 <Dialog open={isFullscreen} onOpenChange={setIsFullscreen}>
                   <DialogTrigger asChild>
-                    <Button variant="outline" size="sm">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full sm:w-auto"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -221,30 +235,34 @@ Example:
                       Fullscreen
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-[90vw] w-[90vw] max-h-[90vh] h-[90vh]">
-                    <DialogHeader>
+                  <DialogContent className="max-w-[95vw] w-[95vw] max-h-[95vh] h-[95vh] p-0">
+                    <DialogHeader className="p-4 sm:p-6">
                       <DialogTitle>Chart Visualization</DialogTitle>
                     </DialogHeader>
-                    <div className="h-[calc(90vh-100px)] w-full">
+                    <div className="h-[calc(95vh-100px)] w-full p-4 sm:p-6">
                       <ChartRenderer data={parsedData} chartType={chartType} />
                     </div>
                   </DialogContent>
                 </Dialog>
               </CardHeader>
-              <CardContent>
-                <div className="h-[400px] w-full">
+              <CardContent className="p-4 sm:p-6">
+                <div className="h-[300px] sm:h-[400px] w-full">
                   <ChartRenderer data={parsedData} chartType={chartType} />
                 </div>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader>
-                <CardTitle>Data Preview</CardTitle>
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-lg sm:text-xl">
+                  Data Preview
+                </CardTitle>
                 <CardDescription>First 10 rows of your data</CardDescription>
               </CardHeader>
-              <CardContent>
-                <DataTable data={parsedData.slice(0, 10)} />
+              <CardContent className="p-4 sm:p-6">
+                <div className="overflow-x-auto w-full">
+                  <DataTable data={parsedData.slice(0, 10)} />
+                </div>
               </CardContent>
             </Card>
           </>

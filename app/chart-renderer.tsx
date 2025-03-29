@@ -80,14 +80,16 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
   const chartColor = `hsl(var(--chart-1))`;
 
   const renderChart = () => {
+    const commonProps = {
+      data,
+      margin: { top: 20, right: 20, left: 20, bottom: 60 },
+    };
+
     switch (chartType) {
       case "bar":
         return (
           <ChartContainer config={chartConfig} className="h-full">
-            <BarChart
-              data={data}
-              margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-            >
+            <BarChart {...commonProps}>
               <CartesianGrid vertical={false} strokeDasharray="3 3" />
               <XAxis
                 dataKey={xAxis}
@@ -95,8 +97,10 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
                 textAnchor="end"
                 height={60}
                 tickMargin={20}
+                interval={0}
+                minTickGap={50}
               />
-              <YAxis />
+              <YAxis width={60} />
               <Tooltip content={<CustomTooltip />} />
               <Bar dataKey={yAxis} fill={chartColor} radius={4} name={yAxis} />
             </BarChart>
@@ -105,10 +109,7 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
       case "line":
         return (
           <ChartContainer config={chartConfig} className="h-full">
-            <LineChart
-              data={data}
-              margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-            >
+            <LineChart {...commonProps}>
               <CartesianGrid vertical={false} strokeDasharray="3 3" />
               <XAxis
                 dataKey={xAxis}
@@ -116,8 +117,10 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
                 textAnchor="end"
                 height={60}
                 tickMargin={20}
+                interval={0}
+                minTickGap={50}
               />
-              <YAxis />
+              <YAxis width={60} />
               <Tooltip content={<CustomTooltip />} />
               <Line
                 type="monotone"
@@ -134,7 +137,7 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
       case "pie":
         return (
           <ChartContainer config={chartConfig} className="h-full">
-            <PieChart margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+            <PieChart {...commonProps}>
               <Tooltip content={<CustomTooltip />} />
               <Pie
                 data={data}
@@ -142,7 +145,7 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
                 nameKey={xAxis}
                 cx="50%"
                 cy="50%"
-                outerRadius={120}
+                outerRadius="80%"
                 label={({ name, percent }) =>
                   `${name}: ${(percent * 100).toFixed(0)}%`
                 }
@@ -161,10 +164,7 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
       case "area":
         return (
           <ChartContainer config={chartConfig} className="h-full">
-            <AreaChart
-              data={data}
-              margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-            >
+            <AreaChart {...commonProps}>
               <CartesianGrid vertical={false} strokeDasharray="3 3" />
               <XAxis
                 dataKey={xAxis}
@@ -172,8 +172,10 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
                 textAnchor="end"
                 height={60}
                 tickMargin={20}
+                interval={0}
+                minTickGap={50}
               />
-              <YAxis />
+              <YAxis width={60} />
               <Tooltip content={<CustomTooltip />} />
               <Area
                 type="monotone"
@@ -193,7 +195,7 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
   };
 
   return (
-    <div className="h-full pb-8">
+    <div className="h-full">
       <div className="mb-4 flex flex-wrap gap-4">
         <div className="w-full sm:w-auto">
           <label className="block text-sm font-medium mb-1">
@@ -234,7 +236,7 @@ export default function ChartRenderer({ data, chartType }: ChartRendererProps) {
           </div>
         </div>
       </div>
-      {renderChart()}
+      <div className="h-[calc(100%-4rem)]">{renderChart()}</div>
     </div>
   );
 }

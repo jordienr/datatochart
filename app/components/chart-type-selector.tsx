@@ -42,7 +42,7 @@ export function ChartTypeSelector({
     <RadioGroup
       value={value}
       onValueChange={onValueChange}
-      className="grid grid-cols-1 md:grid-cols-4 gap-4"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
     >
       {chartTypes.map((type) => {
         const Icon = type.icon;
@@ -55,12 +55,14 @@ export function ChartTypeSelector({
             />
             <Label
               htmlFor={type.value}
-              className="flex flex-col justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-stone-100 transition-all hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
+              className="flex flex-col items-center text-center rounded-md border-2 border-muted bg-transparent p-3 sm:p-4 hover:bg-stone-100 transition-all hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
             >
-              <Icon className="mb-2 h-6 w-6" />
-              <div className="">
-                <div className="font-semibold">{type.label}</div>
-                <div className="text-sm text-muted-foreground">
+              <Icon className="mb-2 h-5 w-5 sm:h-6 sm:w-6" />
+              <div className="space-y-1">
+                <div className="font-semibold text-sm sm:text-base">
+                  {type.label}
+                </div>
+                <div className="text-xs sm:text-sm text-muted-foreground">
                   {type.description}
                 </div>
               </div>
