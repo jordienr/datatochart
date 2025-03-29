@@ -18,7 +18,7 @@ const chartTypes = [
     value: "line",
     label: "Line Chart",
     icon: LineChart,
-    description: "Ideal for showing trends over time",
+    description: "Ideal for showing trends over time or comparing values",
   },
   {
     value: "pie",
@@ -55,9 +55,9 @@ export function ChartTypeSelector({
             />
             <Label
               htmlFor={type.value}
-              className="flex flex-col items-center text-center rounded-md border-2 border-muted bg-transparent p-3 sm:p-4 hover:bg-stone-100 transition-all hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
+              className="flex flex-col text-xs rounded-md border-2 border-muted bg-transparent p-3 sm:p-4 hover:bg-stone-100 transition-all hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
             >
-              <Icon className="mb-2 h-5 w-5 sm:h-6 sm:w-6" />
+              <Icon className="mb-2 h-5 w-5" />
               <div className="space-y-1">
                 <div className="font-semibold text-sm sm:text-base">
                   {type.label}
