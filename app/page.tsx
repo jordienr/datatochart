@@ -139,13 +139,13 @@ AirPods Pro,3400,March,Accessories`;
       >
         <motion.div variants={cardVariants}>
           <Card>
-            <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-lg sm:text-xl">Input Data</CardTitle>
+            <CardHeader>
+              <CardTitle>Input Data</CardTitle>
               <CardDescription>
                 Paste your data in CSV or JSON format
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-4 sm:p-6">
+            <CardContent>
               <Tabs value={activeTab} onValueChange={setActiveTab}>
                 <TabsList className="mb-4 w-full sm:w-auto">
                   <TabsTrigger value="csv" className="flex-1 sm:flex-none">
@@ -209,15 +209,13 @@ Example:
           <>
             <motion.div variants={cardVariants}>
               <Card>
-                <CardHeader className="p-4 sm:p-6">
-                  <CardTitle className="text-lg sm:text-xl">
-                    Chart Options
-                  </CardTitle>
+                <CardHeader>
+                  <CardTitle>Chart Options</CardTitle>
                   <CardDescription>
                     Select chart type and customize visualization
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="p-4 sm:p-6">
+                <CardContent>
                   <div className="w-full">
                     <label className="block text-sm font-medium mb-2">
                       Chart Type
@@ -233,11 +231,9 @@ Example:
 
             <motion.div variants={cardVariants}>
               <Card>
-                <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 sm:p-6">
+                <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <CardTitle className="text-lg sm:text-xl">
-                      Visualization
-                    </CardTitle>
+                    <CardTitle>Visualization</CardTitle>
                     <CardDescription>
                       Your data visualized as a chart
                     </CardDescription>
@@ -282,7 +278,7 @@ Example:
                     </DialogContent>
                   </Dialog>
                 </CardHeader>
-                <CardContent className="p-4 sm:p-6">
+                <CardContent>
                   <div className="h-[300px] sm:h-[400px] w-full">
                     <ChartRenderer data={parsedData} chartType={chartType} />
                   </div>
@@ -292,13 +288,11 @@ Example:
 
             <motion.div variants={cardVariants}>
               <Card>
-                <CardHeader className="p-4 sm:p-6">
-                  <CardTitle className="text-lg sm:text-xl">
-                    Data Preview
-                  </CardTitle>
+                <CardHeader>
+                  <CardTitle>Data Preview</CardTitle>
                   <CardDescription>First 10 rows of your data</CardDescription>
                 </CardHeader>
-                <CardContent className="p-4 sm:p-6">
+                <CardContent>
                   <div className="overflow-x-auto w-full">
                     <DataTable data={parsedData.slice(0, 10)} />
                   </div>
