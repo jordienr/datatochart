@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Upload } from "lucide-react";
+import { Fullscreen, Upload } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
@@ -81,22 +81,19 @@ export default function DataVizApp() {
   };
 
   const loadDemoData = () => {
-    const demoCSV = `product,sales,month,category
-iPhone 14,2450,January,Smartphones
-Samsung S23,1850,January,Smartphones
-MacBook Pro,980,January,Laptops
-Dell XPS,720,January,Laptops
-AirPods Pro,3200,January,Accessories
-iPhone 14,2680,February,Smartphones
-Samsung S23,2100,February,Smartphones
-MacBook Pro,1150,February,Laptops
-Dell XPS,840,February,Laptops
-AirPods Pro,2900,February,Accessories
-iPhone 14,2890,March,Smartphones
-Samsung S23,2340,March,Smartphones
-MacBook Pro,1280,March,Laptops
-Dell XPS,960,March,Laptops
-AirPods Pro,3400,March,Accessories`;
+    const demoCSV = `month,revenue,units_sold,avg_price,customer_satisfaction,marketing_spend
+January,125000,2800,44.64,4.2,15000
+February,142000,3100,45.81,4.3,18000
+March,168000,3600,46.67,4.4,22000
+April,185000,3900,47.44,4.5,25000
+May,210000,4300,48.84,4.3,28000
+June,195000,4100,47.56,4.2,24000
+July,178000,3800,46.84,4.4,20000
+August,192000,4000,48.00,4.6,23000
+September,225000,4600,48.91,4.5,30000
+October,245000,4900,50.00,4.4,32000
+November,268000,5200,51.54,4.3,35000
+December,295000,5800,50.86,4.5,40000`;
 
     setRawData(demoCSV);
     setActiveTab("csv");
@@ -240,29 +237,8 @@ Example:
                   </div>
                   <Dialog open={isFullscreen} onOpenChange={setIsFullscreen}>
                     <DialogTrigger asChild>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-full sm:w-auto"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="mr-2"
-                        >
-                          <polyline points="15 3 21 3 21 9"></polyline>
-                          <polyline points="9 21 3 21 3 15"></polyline>
-                          <line x1="21" y1="3" x2="14" y2="10"></line>
-                          <line x1="3" y1="21" x2="10" y2="14"></line>
-                        </svg>
-                        Fullscreen
+                      <Button variant="ghost" size="sm">
+                        <Fullscreen className="w-4 h-4" />
                       </Button>
                     </DialogTrigger>
                     <DialogContent className="max-w-[95vw] w-[95vw] max-h-[95vh] h-[95vh] p-0">
@@ -278,8 +254,8 @@ Example:
                     </DialogContent>
                   </Dialog>
                 </CardHeader>
-                <CardContent>
-                  <div className="h-[300px] sm:h-[400px] w-full">
+                <CardContent className="bg-transparent border-none shadow-none px-0">
+                  <div className="h-[500px] w-full">
                     <ChartRenderer data={parsedData} chartType={chartType} />
                   </div>
                 </CardContent>
